@@ -244,7 +244,7 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
 
                                                      return (
                                                         <div key={transaction?._id} className='w-full my-3 border-b border-gray-300 pb-3'>
-                                                            <h1 className='font-semibold text-[.9rem] flex items-center uppercase'>{transaction?.transactionType}{transaction?.transactionType === 'transfer' ? <BsArrowUpRight className='text-red-500' /> : <BsArrowDownLeft className='text-green-600' />}</h1>
+                                                            <h1 className='font-semibold text-[.78rem] flex items-center uppercase'>{transaction?.transactionType}{transaction?.transactionType === 'transfer' ? <BsArrowUpRight className='text-red-500' /> : <BsArrowDownLeft className='text-green-600' />}</h1>
                                                             <div className='flex justify-between leading-5'>
                                                                 <div className='flex text-sm items-center'>
                                                                     {
