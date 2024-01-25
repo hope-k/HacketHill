@@ -157,7 +157,7 @@ const MobileNav = ({ open, toggleOpen }) => {
                                             <VscRemote className='mr-2 text-2xl text-[#3ebde4]' />
                                             Remote Deposits
                                         </div>
-                                        <a href='mailto:support@rothbardau.com' className='mb-5 flex items-center   px-6 py-[0.62rem]'>
+                                        <a href='mailto:support@hacketthillau.com' className='mb-5 flex items-center   px-6 py-[0.62rem]'>
                                             <BsQuestionCircle className='mr-2 text-2xl text-[#3ebde4]' />
                                             Support
                                         </a>
