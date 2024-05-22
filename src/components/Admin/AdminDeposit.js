@@ -90,7 +90,11 @@ const AdminDeposit = () => {
                                     <option value={'sent'}>Sent</option>
                                     <option value={'pending'}>Pending</option>
                                     <option value={'complete'}>Complete</option>
-                                    <option value={'failed'}>Failed</option>
+                                    <option value={'declined'}>Declined</option>
+                                    <option value={'on-hold'}>On Hold</option>
+                                    <option value={'refunded'}>Refunded</option>
+                                    <option value={'awaiting-approval'}>Awaiting Approval</option>
+                                    <option value={'reversed'}>Awaiting Approval</option>
                                 </select>
                             </div>
                             <div className='flex flex-col relative m-5 w-fit h-fit '>

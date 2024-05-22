@@ -46,14 +46,15 @@ export const deleteAccount = createAsyncThunk('/delete-account', async ({ id }, 
         return err.response.data
     }
 });
-export const createAccount = createAsyncThunk('/create-account', async ({ accountType, balance, user }, { getState }) => {
+export const createAccount = createAsyncThunk('/create-account', async ({ accountType, balance, user, currency }, { getState }) => {
     try {
         const state = getState()
         const token = state.auth?.token
         const { data } = await instance.post(`/api/add-account`, {
             accountType,
             balance,
-            user
+            user,
+            currency
         }, {
             headers: {
                 'Authorization': `Bearer ${token}`
