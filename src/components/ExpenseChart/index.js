@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -9,102 +9,123 @@ import {
     Title,
     Tooltip,
     Legend,
-    Filler,
-    BarElement
+    Filler
 } from 'chart.js';
+
 ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
     Title,
-    BarElement,
     Tooltip,
     Legend,
     Filler
 );
 
-
-const ExpenseChart = ({stats}) => {
-
-
-    const state = {
+const ExpenseChart = ({ stats }) => {
+    const data = {
         labels: stats && stats.map(stat => stat?.expense?.year),
         datasets: [
             {
-                label: 'Expense',
-                fill: false,
-                lineTension: 0.5,
-                backgroundColor: '#FC0303',
-                borderColor: '#FC0303',
-                borderWidth: 2,
-                borderRadius: 70,
-                hoverBorderColor: 'black',
-                hoverBorderWidth: 2,
+                label: 'Expense Statistics',
+                fill: true,
+                lineTension: 0.4,
+                backgroundColor: 'rgba(252, 3, 3, 0.2)',
+                borderColor: 'rgba(252, 3, 3, 0.6)',
+                hoverBorderColor: 'rgba(252, 3, 3, 0.8)',
                 data: stats && stats.map(stat => stat?.expense?.amount),
+                borderWidth: 0.2,
+                hoverBorderWidth: 2,
+                pointHoverRadius: 4,
+                pointRadius: 3,
+                pointBackgroundColor: 'rgba(252, 3, 3, 0.1)',
+                pointBorderColor: 'rgba(252, 3, 3, 0.1)',
+                pointHoverBackgroundColor: 'rgba(252, 3, 3, 1)',
+                pointHoverBorderColor: 'rgba(252, 3, 3, 1)',
             }
         ]
-    }
+    };
+
+    // 'rgba(252, 3, 3, 0.6)'
+
     const options = {
         responsive: true,
         plugins: {
             legend: {
                 position: 'top',
+                align: 'center',
+                labels: {
+                    usePointStyle: true,
+                    pointStyle: 'circle',
+                    font: {
+                        size: 10,
+                        family: 'Poppins',
+                        weight: '500',
+                    },
+                    color: '#333',
+                },
             },
-            title: {
-                text: 'Expense Stats Over Last 5 Years',
-                display: true,
+            tooltip: {
+                backgroundColor: 'rgba(252, 3, 3, 0.8)',
+                titleFont: {
+                    size: 12,
+                    family: 'Poppins',
+                    weight: '500',
+                },
+                bodyFont: {
+                    size: 12,
+                    family: 'Poppins',
+                    weight: '400',
+                },
+                footerFont: {
+                    size: 10,
+                    family: 'Poppins',
+                    weight: '300',
+                },
             },
+        
         },
         interaction: {
             mode: 'index',
-            intersect: false
+            intersect: false,
         },
         scales: {
-            x:
-            {
+            x: {
                 ticks: {
-                    fontColor: 'rgba(17,17,17,.7)',
+                    color: '#333',
+                    font: {
+                        family: 'Poppins',
+                        size: 12,
+                        weight: '300',
+                    },
                 },
-                display: true,
                 grid: {
                     display: false,
-                    borderDash: 2,
-                    borderDashOffset: 1,
-                    color: 'rgba(33, 37, 41, 0.3)',
-                    zeroLineColor: 'rgba(100, 110, 20, 0)',
-                    zeroLineBorderDash: 2,
-                    zeroLineBorderDashOffset: 2,
                 },
             },
-
-            y:
-            {
+            y: {
                 ticks: {
-                    fontColor: 'rgba(17,17,17,.7)',
+                    color: '#333',
+                    font: {
+                        family: 'Poppins',
+                        size: 12,
+                        weight: '300',
+                    },
                 },
-                display: true,
                 grid: {
-                    borderDash: [2],
-                    borderDashOffset: [2],
-                    drawBorder: true,
-                    color: 'rgba(17, 17, 17, 0.15)',
-                    zeroLineColor: 'rgba(33, 37, 41, 0)',
-                    zeroLineBorderDash: 2,
-                    zeroLineBorderDashOffset: 2,
+                    borderDash: [3, 3],
+                    color: 'rgba(0, 0, 0, 0.0)',
                 },
             },
-
         },
     };
+
     return (
         <div>
-            <Bar
-                data={state}
-                options={options}
-            />
+            <Line data={data} options={options} />
         </div>
     );
 }
 
-export default ExpenseChart
+export default ExpenseChart;

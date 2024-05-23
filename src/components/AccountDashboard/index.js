@@ -273,7 +273,7 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
             </div>
             <div className="">
               <div className={"mb-4 bg-gray-100 p-4 lg:p-[5rem] rounded-xl"}>
-                <motion.div layout className="flex flex-wrap md:space-x-4">
+                <motion.div layout className="flex flex-wrap justify-center items-center md:justify-start ">
                   {loading ? (
                     <AccountSkeleton />
                   ) : accounts?.length === 0 ? (
@@ -284,7 +284,7 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
                     accounts?.map((account) => (
                       <div
                         key={account?._id}
-                        className="cursor-pointer bg-gradient-to-r from-teal-500 to-teal-700 h-fit  w-[18rem] rounded-lg text-white relative border-none mb-4 lg:mb-2 py-1 px-3 transition-transform transform hover:scale-[1.01]"
+                        className="cursor-pointer mr-2 bg-gradient-to-r from-teal-500 to-teal-700 h-fit  w-[18rem] rounded-lg text-white relative border-none mb-2 lg:mb-2 px-1 pl-2 transition-transform transform hover:scale-[1.02]"
                       >
                         <div className="flex justify-between  mb-1 border-b border-teal-500 pb-1">
                           <h1 className="font-semibold text-sm capitalize">
@@ -312,14 +312,14 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
                 <div className="flex flex-wrap justify-around">
                   <div
                     className={
-                      "bg-gray-200 rounded-3xl mb-6 mt-4 lg:my-6  px-4 shadow-2xl"
+                      "bg-gray-200 rounded-xl mb-6 mt-4 lg:my-6  px-1 "
                     }
                   >
                     <IncomeCharts stats={stats} />
                   </div>
                   <div
                     className={
-                      " bg-gray-200  rounded-3xl mb-6 lg:my-6 px-4 shadow-2xl"
+                      " bg-gray-200  rounded-xl mb-6 lg:my-6 px-1"
                     }
                   >
                     <ExpenseChart stats={stats} />

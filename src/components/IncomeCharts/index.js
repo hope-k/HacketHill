@@ -1,109 +1,128 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
+import React from "react";
+import { Line } from "react-chartjs-2";
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-    Filler
-} from 'chart.js';
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
 ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-    Filler
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
 );
 
-
 const IncomeCharts = ({ stats }) => {
+  const state = {
+    labels: stats && stats.map((stat) => stat?.income?.year),
 
+    datasets: [
+      {
+        label: "Investments Statistics",
+        fill: true,
+        lineTension: 0.4,
+        backgroundColor: "",
+        backgroundColor: "rgba(0, 128, 128, 0.2)",
+        borderColor: "rgba(0, 128, 128, 0.2)",
+        borderWidth: 0.2,
+        hoverBorderWidth: 2,
+        pointHoverRadius: 4,
+        pointRadius: 3,
+        hoverBorderColor: "rgba(0, 128, 128, 1)",
+        data: stats && stats.map((stat) => stat?.income?.amount),
+        pointBackgroundColor: "rgba(0, 128, 128, 0.1)",
+        pointBorderColor: "rgba(0, 128, 128, 1)",
+        pointHoverBackgroundColor: "rgba(0, 128, 128, 1)",
+      },
 
-
-    const state = {
-        labels: stats && stats.map(stat => stat?.income?.year),
-        datasets: [
-            {
-                label: 'Investments',
-                fill: false,
-                lineTension: 0,
-                backgroundColor: '#FF8C00',
-                borderColor: '#FF8C00',
-                borderWidth: 1,
-                hoverBorderColor: '#83D3CC',
-                hoverBorderWidth: 2,
-                data: stats && stats.map(stat => stat?.income?.amount),
-                pointRadius: 1,
-            }
-        ]
-    }
-    const options = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                text: 'Investments Stats Over Last 5 Years',
-                display: true,
-            },
+    ],
+    
+  };
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        align: "center",
+        labels: {
+          usePointStyle: true,
+          pointStyle: "circle",
+          font: {
+            size: 10,
+            family: "Poppins",
+            weight: "500",
+          },
+          color: "#333",
         },
-        interaction: {
-            mode: 'index',
-            intersect: false
+      },
+      tooltip: {
+        backgroundColor: "rgba(0, 128, 128, 0.8)",
+        titleFont: {
+          size: 12,
+          family: "Poppins",
+          weight: "500",
         },
-        scales: {
-            x:
-            {
-                ticks: {
-                    fontColor: 'rgba(17,17,17,.7)',
-                },
-                display: true,
-                grid: {
-                    display: false,
-                    borderDash: 2,
-                    borderDashOffset: 1,
-                    color: 'rgba(33, 37, 41, 0.3)',
-                    zeroLineColor: 'rgba(100, 110, 20, 0)',
-                    zeroLineBorderDash: 2,
-                    zeroLineBorderDashOffset: 2,
-                },
-            },
-
-            y:
-            {
-                ticks: {
-                    fontColor: 'rgba(17,17,17,.7)',
-                },
-                display: true,
-                grid: {
-                    borderDash: [2],
-                    borderDashOffset: [2],
-                    drawBorder: true,
-                    color: 'rgba(17, 17, 17, 0.15)',
-                    zeroLineColor: 'rgba(33, 37, 41, 0)',
-                    zeroLineBorderDash: 2,
-                    zeroLineBorderDashOffset: 2,
-                },
-            },
-
+        bodyFont: {
+          size: 12,
+          family: "Poppins",
+          weight: "400",
         },
-    };
-    return (
-        <div>
-            <Line
-                data={state}
-                options={options}
-            />
-        </div>
-    );
-}
+        footerFont: {
+          size: 10,
+          family: "Poppins",
+          weight: "300",
+        },
+      },
+    },
+    interaction: {
+      mode: "index",
+      intersect: false,
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#333",
+          font: {
+            family: "Poppins",
+            size: 12,
+            weight: "300",
+          },
+        },
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        ticks: {
+          color: "#333",
+          font: {
+            family: "Poppins",
+            size: 12,
+            weight: "300",
+          },
+        },
+        grid: {
+          borderDash: [3, 3],
+          color: "rgba(0, 0, 0, 0.0)",
+        },
+      },
+    },
+  };
+  return (
+    <div>
+      <Line  data={state} options={options} />
+    </div>
+  );
+};
 
-export default IncomeCharts
+export default IncomeCharts;
