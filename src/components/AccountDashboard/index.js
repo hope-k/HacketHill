@@ -315,14 +315,20 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
                       "bg-gray-200 rounded-xl mb-6 mt-4 lg:my-6  px-1 "
                     }
                   >
-                    <IncomeCharts stats={stats} />
+                    <IncomeCharts stats={stats} currency={
+                      accounts && accounts[0]?.currency
+                    
+                    }/>
                   </div>
                   <div
                     className={
                       " bg-gray-200  rounded-xl mb-6 lg:my-6 px-1"
                     }
                   >
-                    <ExpenseChart stats={stats} />
+                    <ExpenseChart stats={stats} currency={
+                      accounts && accounts[0]?.currency
+                    
+                    } />
                   </div>
                 </div>
               </div>

@@ -11,6 +11,8 @@ import {
     Legend,
     Filler
 } from 'chart.js';
+import getSymbolFromCurrency from 'currency-symbol-map';
+import accounting from 'accounting';
 
 ChartJS.register(
     CategoryScale,
@@ -23,13 +25,21 @@ ChartJS.register(
     Filler
 );
 
-const ExpenseChart = ({ stats }) => {
+const ExpenseChart = ({ stats, currency }) => {
+    const currencySymbol = (currentCurrency) => {
+        if (currentCurrency) {
+          return getSymbolFromCurrency(currentCurrency);
+        } else {
+          return getSymbolFromCurrency("usd");
+        }
+      };
     const data = {
         labels: stats && stats.map(stat => stat?.expense?.year),
         datasets: [
             {
-                label: 'Expense Statistics',
-                fill: true,
+                label: `Expense Metrics ( ${accounting.formatMoney(
+                    stats && stats.reduce((acc, curr) => acc + curr?.income?.amount, 0), currencySymbol(currency)
+                )})`,                fill: true,
                 lineTension: 0.4,
                 backgroundColor: 'rgba(252, 3, 3, 0.2)',
                 borderColor: 'rgba(252, 3, 3, 0.6)',

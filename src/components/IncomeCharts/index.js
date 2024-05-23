@@ -1,5 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import getSymbolFromCurrency  from "currency-symbol-map";
+import accounting from "accounting";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,16 +25,25 @@ ChartJS.register(
   Filler
 );
 
-const IncomeCharts = ({ stats }) => {
+
+const IncomeCharts = ({ stats, currency }) => {
+    const currencySymbol = (currentCurrency) => {
+        if (currentCurrency) {
+          return getSymbolFromCurrency(currentCurrency);
+        } else {
+          return getSymbolFromCurrency("usd");
+        }
+      };
   const state = {
     labels: stats && stats.map((stat) => stat?.income?.year),
 
     datasets: [
       {
-        label: "Investments Statistics",
+        label: `Investment Metrics ( ${accounting.formatMoney(
+            stats && stats.reduce((acc, curr) => acc + curr?.income?.amount, 0), currencySymbol(currency)
+        )})`,
         fill: true,
         lineTension: 0.4,
-        backgroundColor: "",
         backgroundColor: "rgba(0, 128, 128, 0.2)",
         borderColor: "rgba(0, 128, 128, 0.2)",
         borderWidth: 0.2,
