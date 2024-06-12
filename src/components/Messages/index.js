@@ -21,7 +21,7 @@ const Messages = () => {
                 <div className='flex h-full items-center mt-[15rem]'>
                     <div className="container relative px-[1.5rem] md:px-[5rem] lg:px-[20rem] ">
                         <div className='bg-gray-100 p-4  rounded-xl shadow-2xl'>
-                            <h1 className='font-semibold px-4 mt-2 lg:absolute '>Messages</h1>
+                            <h1 className='font-semibold px-4 mb-2 lg:absolute '>Messages</h1>
                             <div className="px-2 flex-col items-center justify-center p-4 h-full">
                                 {
                                     !messages?.length ?
@@ -33,14 +33,14 @@ const Messages = () => {
                                     :
                                         messages && messages.map((message) => (
                                             <>
-                                                <div key={message?._id} className='px-2 flex  p-2 mt-6 relative bg-slate-50 rounded-md shadow-sm border border-gray-100 '>
+                                                <div key={message?._id} className='px-4 py-3 flex mt-3 relative bg-white rounded-lg border-b border-gray-200'>
                                                     <div className="flex flex-col">
-                                                        <h1 className='font-normal text-[.9rem] border-[1.3px] border-teal-500 w-fit p-[.2rem] rounded-lg '>{message?.title}</h1>
-                                                        <h1 className='text-[.92rem] font-[350] border-l border-yellow-600 pl-1 mt-3 rounded'>{message?.text}</h1>
+                                                        <h1 className='font-semibold text-sm text-gray-400 mb-1'>{message?.title}</h1>
+                                                        <p className='text-sm text-gray-700 mt-2'>{message?.text}</p>
                                                     </div>
-                                                    <h1 className='absolute right-0 font-light text-[.81rem]'>{moment(message?.createdAt).fromNow()}</h1>
+                                                    <span className='absolute right-4 top-3 text-xs text-gray-500'>{moment(message?.createdAt).fromNow()}</span>
                                                 </div>
-                                                <hr className='border-b border-gray-200' />
+                                                <hr className='border-t border-gray-300 mt-4' />
                                             </>
                                         ))
                                 }

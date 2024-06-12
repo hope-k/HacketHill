@@ -37,6 +37,14 @@ import AccountSkeleton from "../AccountSkeleton";
 import getSymbolFromCurrency from "currency-symbol-map";
 import TransactionModal from "../Transactions/TransactionModal";
 import { AiOutlineEye } from "react-icons/ai";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem,
+} from "@nextui-org/dropdown";
+import { Button, Badge } from "@nextui-org/react";
 
 const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
   const stickyElement = useRef(null);
@@ -250,30 +258,57 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
                 Dashboard
                 <MdAccountBalance className="ml-2" />
               </h1>
-              <Link to="/account/messages">
-                {recentMessages &&
-                  recentMessages
-                    .slice(0, 1)
-                    .map(
-                      (message) =>
-                        moment(message?.createdAt).fromNow() ===
-                          ("a few seconds ago" ||
-                            "44 seconds ago" ||
-                            "a minute ago") && (
-                          <div className=" absolute right-5 top-3 bg-blue-400 rounded-full p-1"></div>
-                        )
+
+              <Dropdown>
+                <DropdownTrigger>
+                  <div className="relative inline-block">
+                    {recentMessages?.length > 0 && (
+                      <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
+                        {recentMessages?.length}
+                      </span>
                     )}
-                <BellIcon
-                  className={
-                    "w-6 lg:opacity-100 " +
-                    (dashTextOpacity === 0 ? "opacity-0 " : "opacity-100 ")
-                  }
-                />
-              </Link>
+
+                    <BellIcon
+                      className={
+                        "w-6 lg:opacity-100 relative " +
+                        (dashTextOpacity === 0 ? "opacity-0 " : "opacity-100 ")
+                      }
+                    />
+                  </div>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label="Static Actions"
+                  className="bg-slate-50 rounded-lg p-2"
+                >
+                  {recentMessages?.map((message) => (
+                    <DropdownItem
+                      key={message?._id}
+                      className="hover:bg-gray-100 mb-1 border-b border-slate-300 pb-2"
+                    >
+                      <Link to={'/account/messages'}>
+                      <div className="flex items-center justify-between mb-1 space-x-2  ">
+                        <h1 className="font-bold text-[13px]">
+                          {message?.title}
+                        </h1>
+                        <h1 className="font-light text-xs">
+                          {moment(message?.createdAt).fromNow()}
+                        </h1>
+                      </div>
+                      <h1 className="font-light text-sm max-w-[25ch]">
+                        {message?.text}
+                      </h1>
+                      </Link>
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
             </div>
             <div className="">
               <div className={"mb-4 bg-gray-100 p-4 lg:p-[5rem] rounded-xl"}>
-                <motion.div layout className="flex flex-wrap justify-center items-center md:justify-start ">
+                <motion.div
+                  layout
+                  className="flex flex-wrap justify-center items-center md:justify-start "
+                >
                   {loading ? (
                     <AccountSkeleton />
                   ) : accounts?.length === 0 ? (
@@ -315,20 +350,10 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
                       "bg-gray-200 rounded-xl mb-6 mt-4 lg:my-6  px-1 "
                     }
                   >
-                    <IncomeCharts stats={stats} currency={
-                      accounts && accounts[0]?.currency
-                    
-                    }/>
+                    <IncomeCharts stats={stats} />
                   </div>
-                  <div
-                    className={
-                      " bg-gray-200  rounded-xl mb-6 lg:my-6 px-1"
-                    }
-                  >
-                    <ExpenseChart stats={stats} currency={
-                      accounts && accounts[0]?.currency
-                    
-                    } />
+                  <div className={" bg-gray-200  rounded-xl mb-6 lg:my-6 px-1"}>
+                    <ExpenseChart stats={stats} />
                   </div>
                 </div>
               </div>
@@ -488,24 +513,15 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
                     recentMessages &&
                     recentMessages.map((message) => (
                       <>
-                        <div
-                          key={message?._id}
-                          className="px-2 flex  p-3 mt-6 relative bg-slate-50 rounded-md shadow-lg"
-                        >
+                      <div key={message?._id} className='px-4 py-3 flex mt-3 relative bg-white rounded-lg border-b border-gray-200'>
                           <div className="flex flex-col">
-                            <h1 className="font-normal text-[.9rem] border-[1.3px] border-teal-500 w-fit p-[.2rem] rounded-lg ">
-                              {message?.title}
-                            </h1>
-                            <h1 className="text-[.92rem] font-[350] border-l border-yellow-600 pl-1 mt-3 rounded">
-                              {message?.text}
-                            </h1>
+                              <h1 className='font-semibold text-sm text-gray-400 mb-1'>{message?.title}</h1>
+                              <p className='text-sm text-gray-700 mt-2'>{message?.text}</p>
                           </div>
-                          <h1 className="absolute right-0 font-extralight text-[.81rem]">
-                            {moment(message?.createdAt).fromNow()}
-                          </h1>
-                        </div>
-                        <hr className="border-b border-gray-200" />
-                      </>
+                          <span className='absolute right-4 top-3 text-xs text-gray-500'>{moment(message?.createdAt).fromNow()}</span>
+                      </div>
+                      <hr className='border-t border-gray-300 mt-4' />
+                  </>
                     ))
                   )}
                 </div>
