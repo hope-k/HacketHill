@@ -169,7 +169,7 @@ const Header = () => {
               className={
                 "text-sm bg-slate-100 p-2 rounded-lg " +
                 (isAuthenticated &&
-                  "text-gray-100 bg-teal-500 rounded-full p-4 cursor-pointer")
+                  "text-gray-100 bg-teal-500 rounded-full  cursor-pointer")
               }
             >
               {!loading && isAuthenticated ? (
@@ -261,25 +261,25 @@ const Header = () => {
                       } transition-transform duration-200`}
                     />
                   </Link>
-                    {openMenu === index && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ type: "spring", bounce: 0, duration:.15 }}
-                        className="absolute left-0 w-40 mt-2 p-2 bg-white shadow-lg rounded-md"
-                      >
-                        {menu.submenus.map((submenu, subIndex) => (
-                          <Link
-                            key={subIndex}
-                            to="/sign-in"
-                            className="block p-2 hover:bg-[#605111] hover:rounded-lg hover:text-white duration-100 text-sm font-poppins"
-                          >
-                            {submenu}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
+                  {openMenu === index && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ type: "spring", bounce: 0, duration: 0.15 }}
+                      className="absolute left-0 w-40 mt-2 p-2 bg-white shadow-lg rounded-md"
+                    >
+                      {menu.submenus.map((submenu, subIndex) => (
+                        <Link
+                          key={subIndex}
+                          to="/sign-in"
+                          className="block p-2 hover:bg-[#605111] hover:rounded-lg hover:text-white duration-100 text-sm font-poppins"
+                        >
+                          {submenu}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
                 </div>
               ))}
             </div>

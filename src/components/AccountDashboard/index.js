@@ -198,7 +198,7 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
               initial={{ y: 15, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.85, ease: "easeInOut" }}
-              className="text-2xl font-light p-4 flex"
+              className="lg:text-2xl text-sm  font-light p-4 flex"
             >
               {showGreet()}, {user?.firstName}
             </motion.div>
