@@ -79,6 +79,16 @@ const Transactions = () => {
     setSelectedTransaction(null);
     setModalIsOpen(false);
   };
+  const getTransactionStatus = (transaction) => {
+    const status = transaction?.status;
+    if (status === "complete" && transaction?.transactionType === "transfer") {
+      return "sent";
+    } else if (status === "complete" && transaction?.transactionType === "deposit") {
+      return "credited";
+    } else {
+      return status;
+    }
+  };
 
   return (
     <>
@@ -152,9 +162,7 @@ const Transactions = () => {
                                 transaction?.status
                               )}
                             >
-                              {transaction?.status === "complete"
-                                ? "sent"
-                                : transaction?.status}
+                              {getTransactionStatus(transaction)}
                             </h1>
                           )}
                           {/* <h1 className="text-gray-500 mx-2 text-[.8rem] font-light lg:font-normal">

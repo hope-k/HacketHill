@@ -112,10 +112,12 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
       );
     }
   };
+
   const logoutUser = () => {
     dispatch(logout());
     navigate(0);
   };
+
   const recentTransactions = transactions && transactions.slice(0, 4);
   const recentMessages = messages && messages && messages.slice(0, 2);
 
@@ -179,6 +181,16 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
     setSelectedTransaction(null);
     setModalIsOpen(false);
   };
+  const getTransactionStatus = (transaction) => {
+    const status = transaction?.status;
+    if (status === "complete" && transaction?.transactionType === "transfer") {
+      return "sent";
+    } else if (status === "complete" && transaction?.transactionType === "deposit") {
+      return "credited";
+    } else {
+      return status;
+    }
+  };
 
   return (
     <>
@@ -198,7 +210,7 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
               initial={{ y: 15, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.85, ease: "easeInOut" }}
-              className="lg:text-2xl text-sm  font-light p-4 flex"
+              className="lg:text-2xl text-[15px] font-light p-4 flex items-center justify-center"
             >
               {showGreet()}, {user?.firstName}
             </motion.div>
@@ -414,9 +426,7 @@ const AccountDashboard = ({ toggleProfileDropdown, profileDropdown }) => {
                                       transaction?.status
                                     )}
                                   >
-                                    {transaction?.status === "complete"
-                                      ? "sent"
-                                      : transaction?.status}
+                                    {getTransactionStatus(transaction)}
                                   </h1>
                                 )}
                                 {/* <h1 className="text-gray-500 mx-2 text-[.8rem] font-light lg:font-normal">
