@@ -44,7 +44,7 @@ const AdminBankAccount = () => {
   const [balance, setBalance] = useState(0);
   const [user, setUser] = useState("");
   const [accountID, setAccountID] = useState("");
-  const [currency, setCurrency] = useState("");
+  const [currency, setCurrency] = useState("usd");
   const [editField, setEditField] = useState("");
   const [editID, setEditID] = useState("");
   const [editValue, setEditValue] = useState("");
